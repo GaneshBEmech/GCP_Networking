@@ -14,9 +14,16 @@ resource "google_compute_instance" "task1-instance-1" {
     }
   }
   
+  allow_stopping_for_update = true
+
   network_interface {
     network = google_compute_network.custom_network.id
     subnetwork = google_compute_subnetwork.us-central1.id 
+  }
+
+  service_account {
+    email= "my-project-3-358101@my-project-3-358101.iam.gserviceaccount.com"
+    scopes = ["cloud-platform"]
   }
   
    depends_on = [
@@ -37,6 +44,12 @@ resource "google_compute_instance" "task1-instance-2" {
     }
   }
   
+  allow_stopping_for_update = true
+
+  service_account {
+    email = "my-project-3-358101@my-project-3-358101.iam.gserviceaccount.com"
+    scopes = ["cloud-platform"]
+  }
   network_interface {
     network = google_compute_network.custom_network.id
     subnetwork = google_compute_subnetwork.us-east1.id 
